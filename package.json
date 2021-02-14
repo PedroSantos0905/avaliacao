@@ -1,0 +1,22 @@
+{
+  "name": "avaliacao-tinnova",
+  "version": "1.0.0",
+  "description": "Avaliação Tinnova",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroSantos0905/avaliacao.git"
+  },
+  "author": "Pedro Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedroSantos0905/avaliacao/issues"
+  },
+  "homepage": "https://github.com/PedroSantos0905/avaliacao#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
