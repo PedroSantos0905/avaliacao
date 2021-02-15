@@ -31,4 +31,23 @@ app.post("/busca-fatorial", function(req, res, next){
     res.send("O fatorial de " + req.body.valor + " é: " + Fatorial(req.body.valor));
 });
 
+app.get("/multiplos", function(req, res, next){
+    res.sendFile(__dirname + "/html/multiplos.html");
+});
+
+app.post("/busca-soma", function(req, res, next){
+
+     x = 3;
+     z = 5;
+     resSoma = 0;
+    
+    for(i = 0; i < req.body.valor; i++){
+        if(i % x == 0 || i % z == 0){
+            resSoma += i;
+        }
+    }
+
+    res.send("A soma dos multiplos de 3 ou 5 até " + req.body.valor + " é: " + resSoma);
+});
+
 module.exports = app;
