@@ -28,7 +28,7 @@ bubbleSort(a);
 console.log('Vetor desordenado:' + desordenado);
 console.log('Vetor ordenado: [' + a + '];');
 
-res.status(200).send({
+res.status(201).send({
     'Vetor desordenado': desordenado,
     'Vetor ordenado': a
 });

@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
         brancos = 150;
         nulos = 50;
 
-        res.status(200).send({
+        res.status(201).send({
             'Percentual de votos válidos': validos / total_eleitores * X + '%',
             'Percentual de votos brancos': brancos / total_eleitores * X + '%',
             'Percentual de votos nulos': nulos / total_eleitores * X + '%'
