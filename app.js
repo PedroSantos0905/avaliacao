@@ -1,17 +1,50 @@
+const path = require('path');
 const express = require('express');
-const app = express();
+const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const app = express();
 const rotaVotos = require('./class/votos');
 const rotaVetor = require('./class/vetor');
+require("dotenv").config();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+const connection=mysql.createConnection({
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT
+  });
+
+connection.connect(function(error){
+    if(!!error) console.log(error);
+    else console.log('Database Connected!');
+  }); 
+
+app.set('views',path.join(__dirname,'views'));
+
+app.set('view engine', 'ejs');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/votos', rotaVotos);
 app.use('/vetor', rotaVetor);
 
-app.get("/", function(req, res, next){
-    res.sendFile(__dirname + "/html/index.html");
+app.get('/',(req, res) => {
+        let sql = 'SELECT nm_veiculo,nm_marca,ano,descricao, case when vendido = 1 then "Sim" else "Não" end as vendido,created,updated FROM tb_veiculo';
+        let query = connection.query(sql, (err, rows) => {
+        if(err) throw err;
+        res.render('vei_index', {
+            title : 'CRUD de Veículos',
+            veiculos : rows
+        });
+    });
+});
+
+app.get('/cadastrar-vei',(req, res) => {
+    res.render('vei_add', {
+        title : 'CRUD de Veículos'
+    });
 });
 
 app.get("/fatorial", function(req, res, next){
