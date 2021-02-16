@@ -8,13 +8,13 @@ const rotaVotos = require('./class/votos');
 const rotaVetor = require('./class/vetor');
 require("dotenv").config();
 
-const connection=mysql.createConnection({
+var connection=mysql.createConnection({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     host: process.env.MYSQL_HOST,
     port: process.env.MYSQL_PORT
-  });
+});
 
 connection.connect(function(error){
     if(!!error) console.log(error);
@@ -99,6 +99,250 @@ app.get('/nao-vendido',(req, res) => {
 
 app.get('/nao-vendido',(req, res) => {
     res.render('vei_nao-vendido', {
+        title : 'CRUD de Veículos' 
+    });
+});
+
+app.get('/add-ult-semana',(req, res) => {
+    let sql = 'SELECT id_veiculo, nm_veiculo,nm_marca,ano,descricao, case when vendido = 1 then "Sim" else "Não" end as vendido,created,updated FROM tb_veiculo WHERE created BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()';
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_add-ult-semana', {
+        title : 'CRUD de Veículos',
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/add-ult-semana',(req, res) => {
+    res.render('vei_add-ult-semana', {
+        title : 'CRUD de Veículos' 
+    });
+});
+
+app.get('/vei-por-decada-2020',(req, res) => {
+    const decada_ini = 2020;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada-2010',(req, res) => {
+    const decada_ini = 2010;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada-2000',(req, res) => {
+    const decada_ini = 2000;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada-1990',(req, res) => {
+    const decada_ini = 1990;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada-1980',(req, res) => {
+    const decada_ini = 1980;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada-1970',(req, res) => {
+    const decada_ini = 1970;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada-1960',(req, res) => {
+    const decada_ini = 1960;
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where ano >= ${decada_ini} and ano <= ${decada_ini} + 9`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-decada', {
+        title : 'CRUD de Veículos',
+        decadaAtual : decada_ini,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-ch',(req, res) => {
+    const nm_marca = "Chevrolet";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-to',(req, res) => {
+    const nm_marca = "Toyota";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-vo',(req, res) => {
+    const nm_marca = "Volkswagen";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-fo',(req, res) => {
+    const nm_marca = "Ford";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-ho',(req, res) => {
+    const nm_marca = "Honda";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-bm',(req, res) => {
+    const nm_marca = "BMW";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-ni',(req, res) => {
+    const nm_marca = "Nissan";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-hy',(req, res) => {
+    const nm_marca = "Hyundai";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-ki',(req, res) => {
+    const nm_marca = "Kia";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-marca-me',(req, res) => {
+    const nm_marca = "Mercedes-Benz";
+    let sql = `SELECT id_veiculo, nm_veiculo, nm_marca, ano, descricao, case when vendido = 1 then "Sim" else "Não" end as vendido, created, updated FROM tb_veiculo where nm_marca = '${nm_marca}'`;
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_por-marca', {
+        title : 'CRUD de Veículos',
+        marcaAtual : nm_marca,
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/vei-por-decada',(req, res) => {
+    res.render('vei_por-decada', {
         title : 'CRUD de Veículos' 
     });
 });
