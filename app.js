@@ -31,7 +31,7 @@ app.use('/votos', rotaVotos);
 app.use('/vetor', rotaVetor);
 
 app.get('/',(req, res) => {
-        let sql = 'SELECT nm_veiculo,nm_marca,ano,descricao, case when vendido = 1 then "Sim" else "Não" end as vendido,created,updated FROM tb_veiculo';
+        let sql = 'SELECT id_veiculo, nm_veiculo,nm_marca,ano,descricao, case when vendido = 1 then "Sim" else "Não" end as vendido,created,updated FROM tb_veiculo';
         let query = connection.query(sql, (err, rows) => {
         if(err) throw err;
         res.render('vei_index', {
@@ -43,7 +43,63 @@ app.get('/',(req, res) => {
 
 app.get('/cadastrar-vei',(req, res) => {
     res.render('vei_add', {
-        title : 'CRUD de Veículos'
+        title : 'CRUD de Veículos' 
+    });
+});
+
+app.post('/cadastrar',(req, res) => { 
+    let data = {nm_veiculo: req.body.nome, nm_marca: req.body.marca, ano: req.body.ano, descricao: req.body.descricao, vendido: req.body.vendido};
+    let sql = "INSERT INTO tb_veiculo SET ?";
+    let query = connection.query(sql, data,(err, results) => {
+      if(err) throw err;
+      res.redirect('/');
+    });
+});
+
+app.get('/editar/:id_veiculo',(req, res) => {
+    const id_veiculo = req.params.id_veiculo;
+    let sql = `SELECT id_veiculo, nm_veiculo,nm_marca,ano,descricao, case when vendido = 1 then "Sim" else "Não" end as vendido,created,updated FROM tb_veiculo where id_veiculo = ${id_veiculo}`;
+    let query = connection.query(sql,(err, result) => {
+        if(err) throw err;
+        res.render('vei_edit', {
+            title : 'CRUD de Veículos',
+            veiculo : result[0]
+        });
+    });
+});
+
+app.post('/atualizar',(req, res) => {
+    const id_veiculo = req.body.id_veiculo;
+    let sql = "update tb_veiculo SET nm_veiculo='"+req.body.nome+"',  nm_marca='"+req.body.marca+"',  ano='"+req.body.ano+"', descricao='"+req.body.descricao+"', vendido='"+req.body.vendido+"', updated=now() where id_veiculo ="+id_veiculo;
+    let query = connection.query(sql,(err, results) => {
+      if(err) throw err;
+      res.redirect('/');
+    });
+});
+
+app.get('/excluir/:id_veiculo',(req, res) => {
+    const id_veiculo = req.params.id_veiculo;
+    let sql = `DELETE FROM tb_veiculo where id_veiculo = ${id_veiculo}`;
+    let query = connection.query(sql,(err, result) => {
+        if(err) throw err;
+        res.redirect('/');
+    });
+});
+
+app.get('/nao-vendido',(req, res) => {
+    let sql = 'SELECT id_veiculo, nm_veiculo,nm_marca,ano,descricao, case when vendido = 1 then "Sim" else "Não" end as vendido,created,updated FROM tb_veiculo where vendido = 0';
+    let query = connection.query(sql, (err, rows) => {
+    if(err) throw err;
+    res.render('vei_nao-vendido', {
+        title : 'CRUD de Veículos',
+        veiculos : rows
+        });
+    });
+});
+
+app.get('/nao-vendido',(req, res) => {
+    res.render('vei_nao-vendido', {
+        title : 'CRUD de Veículos' 
     });
 });
 
