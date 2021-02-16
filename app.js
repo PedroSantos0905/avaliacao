@@ -8,18 +8,13 @@ const rotaVotos = require('./class/votos');
 const rotaVetor = require('./class/vetor');
 require("dotenv").config();
 
-var connection=mysql.createConnection({
+var connection=mysql.createPool({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     host: process.env.MYSQL_HOST,
     port: process.env.MYSQL_PORT
 });
-
-connection.connect(function(error){
-    if(!!error) console.log(error);
-    else console.log('Database Connected!');
-  }); 
 
 app.set('views',path.join(__dirname,'views'));
 
