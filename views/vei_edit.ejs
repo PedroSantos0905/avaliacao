@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2><%= title %></h2>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a href="/" class="btn btn-sm btn-primary">Página Inicial</a><br/><br/>
+                </th>
+                <th>
+                    <a href="/cadastrar-vei" class="btn btn-sm btn-primary">Cadastrar veículo</a><br/><br/>
+                </th>
+                <th>
+                    <a href="/nao-vendido" class="btn btn-sm btn-primary">Não vendidos</a><br/><br/>
+                </th>
+                <th>
+                    <a href="/add-ult-semana" class="btn btn-sm btn-primary">Cadastrados na ultima semana</a><br/><br/>
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veículos por década</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/vei-por-decada-2020">2020</a>
+                      <a class="dropdown-item" href="/vei-por-decada-2010">2010</a>
+                      <a class="dropdown-item" href="/vei-por-decada-2000">2000</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1990">1990</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1980">1980</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1970">1970</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1960">1960</a>
+                    </div>
+                </th>
+                <th>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veículos por marca</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/vei-por-marca-ch">Chevrolet</a>
+                      <a class="dropdown-item" href="/vei-por-marca-to">Toyota</a>
+                      <a class="dropdown-item" href="/vei-por-marca-vo">Volkswagen</a>
+                      <a class="dropdown-item" href="/vei-por-marca-fo">Ford</a>
+                      <a class="dropdown-item" href="/vei-por-marca-ho">Honda</a>
+                      <a class="dropdown-item" href="/vei-por-marca-ni">Nissan</a>
+                      <a class="dropdown-item" href="/vei-por-marca-hy">Hyundai</a>
+                      <a class="dropdown-item" href="/vei-por-marca-ki">Kia</a>
+                      <a class="dropdown-item" href="/vei-por-marca-me">Mercedes-Benz</a>
+                      <a class="dropdown-item" href="/vei-por-marca-bm">BMW</a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+    </table>    
+    <br>
+  <h3>Alterar veículos</h3>
+    <form action="/atualizar" method="post">
+        <input type="hidden" value="<%= veiculo.id_veiculo %>" name="id_veiculo">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" class="form-control" id="nome" placeholder="Digite o nome do veículo" name="nome" value="<%= veiculo.nm_veiculo %>" required>
+        </div>
+        <div class="form-group">
+        <label for="marca" >Marca Atual:</label>
+        <input type="text" id="nome" value="<%= veiculo.nm_marca %>" readonly="true" >
+        <label for="marca">Marca:</label>
+          <select id="marca" name="marca" required>
+            <option value="">selecione</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Ford">Ford</option>
+            <option value="Honda">Honda</option>
+            <option value="Nissan">Nissan</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Kia">Kia</option>
+            <option value="Mercedes-Benz">Mercedes-Benz</option>
+            <option value="BMW">BMW</option>
+        </select>
+        </div>
+        <div class="form-group">
+          <label for="ano">Ano:</label>
+          <input type="text" class="form-control" id="ano" placeholder="Digite o ano do veículo" name="ano" value="<%= veiculo.ano %>" required>
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" value="<%= veiculo.descricao %>" required>
+        </div>
+        <div class="form-group">
+            <label for="vendido" >Vendido:</label>
+            <input type="text" id="nome" value="<%= veiculo.vendido %>" readonly="true" >
+            <label for="vendido">Vendido:</label>
+            <select id="vendido" name="vendido" required>
+                <option value="">selecione</option>
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Alterar</button>
+      </form>
+</div>
+</body>
+</html>

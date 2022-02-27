@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2><%= title %></h2>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a href="/" class="btn btn-sm btn-primary">Página Inicial</a><br/><br/>
+                </th>
+                <th>
+                    <a href="/cadastrar-vei" class="btn btn-sm btn-primary">Cadastrar veículo</a><br/><br/>
+                </th>
+                <th>
+                    <a href="/nao-vendido" class="btn btn-sm btn-primary">Não vendidos</a><br/><br/>
+                </th>
+                <th>
+                    <a href="/add-ult-semana" class="btn btn-sm btn-primary">Cadastrados na ultima semana</a><br/><br/>
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veículos por década</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/vei-por-decada-2020">2020</a>
+                      <a class="dropdown-item" href="/vei-por-decada-2010">2010</a>
+                      <a class="dropdown-item" href="/vei-por-decada-2000">2000</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1990">1990</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1980">1980</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1970">1970</a>
+                      <a class="dropdown-item" href="/vei-por-decada-1960">1960</a>
+                    </div>
+                </th>
+                <th>
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veículos por marca</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/vei-por-marca-ch">Chevrolet</a>
+                      <a class="dropdown-item" href="/vei-por-marca-to">Toyota</a>
+                      <a class="dropdown-item" href="/vei-por-marca-vo">Volkswagen</a>
+                      <a class="dropdown-item" href="/vei-por-marca-fo">Ford</a>
+                      <a class="dropdown-item" href="/vei-por-marca-ho">Honda</a>
+                      <a class="dropdown-item" href="/vei-por-marca-ni">Nissan</a>
+                      <a class="dropdown-item" href="/vei-por-marca-hy">Hyundai</a>
+                      <a class="dropdown-item" href="/vei-por-marca-ki">Kia</a>
+                      <a class="dropdown-item" href="/vei-por-marca-me">Mercedes-Benz</a>
+                      <a class="dropdown-item" href="/vei-por-marca-bm">BMW</a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+    </table>    
+    <br>   
+    <table class="table table-dark table-striped">
+        <h3>Veículos da <%= marcaAtual %></h3>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>Ano</th>
+                <th>Descrição</th>
+                <th>Vendido</th>
+                <th>Cadastrado</th>
+                <th>Atualizado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% veiculos.forEach(function(veiculo){ %>
+                <tr>
+                    <td><%= veiculo.id_veiculo %></td>
+                    <td><%= veiculo.nm_veiculo %></td>
+                    <td><%= veiculo.nm_marca %></td>
+                    <td><%= veiculo.ano %></td>
+                    <td><%= veiculo.descricao %></td>
+                    <td><%= veiculo.vendido %></td>
+                    <td><%= veiculo.created %></td>
+                    <td><%= veiculo.updated %></td>
+                    <td>
+                        <a href="editar/<%= veiculo.id_veiculo %>" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="excluir/<%= veiculo.id_veiculo %>" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
